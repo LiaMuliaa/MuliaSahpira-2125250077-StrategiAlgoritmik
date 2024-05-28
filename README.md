@@ -1,0 +1,1 @@
+# MuliaSahpira-2125250077-StrategiAlgoritmik

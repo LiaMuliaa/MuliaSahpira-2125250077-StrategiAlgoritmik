@@ -44,8 +44,8 @@ function displayBooks(books) {
         bookDiv.innerHTML = `
             <h2>${book.title}</h2>
             <p>Category: ${book.category}</p>
-            <p>Rating: ${book.rating}</p>
-            <p>Price: $${book.price}</p>
+            <p>Rating: ${'*'.repeat(book.rating)}</p>
+            <p>Price: ${book.price} GBP</p>
             <p>Stock: ${book.stock}</p>
         `;
         bookList.appendChild(bookDiv);
@@ -56,6 +56,7 @@ const bestBooks = selectBestBooks(books);
 displayBooks(bestBooks);
 
 
+// Fitur Optimize Cart with Dynamic Programming
 function findSubsetBooks() {
     const targetPrice = parseFloat(document.getElementById('targetPrice').value) * 100;
     const n = books.length;
@@ -112,10 +113,10 @@ function findSubsetBooks() {
                 <li>
                     <strong>Title:</strong> ${book.title}<br>
                     <strong>Rating:</strong> ${book.rating}<br>
-                    <strong>Price:</strong> $${book.price.toFixed(2)}
+                    <strong>Price:</strong> ${book.price.toFixed(2)} GBP
                 </li>`).join('')}
         </ul>
-        <h3>Total Price: $${(dp[n][resPrice] / 100).toFixed(2)}</h3>
+        <h3>Total Price: ${(dp[n][resPrice] / 100).toFixed(2)} GBP</h3>
         <h2>Number of Books: ${selectedBooks.length}</h2>
     `;
 }
@@ -140,7 +141,7 @@ function recommendBook() {
             <h2>${book.title}</h2>
             <p>Category: ${book.category}</p>
             <p>Rating: ${'*'.repeat(book.rating)}</p>
-            <p>Price: $${book.price}</p>
+            <p>Price: ${book.price} GBP</p>
             <p>Stock: ${book.stock}</p>
         </div>`;
     });
@@ -185,11 +186,11 @@ function displayPackage(pkg) {
     packageDiv.className = 'package';
     packageDiv.innerHTML = `<div class="package-title"><strong>Categories: ${pkg.categoryCombo}</strong></div>`;
     pkg.books.forEach(book => {
-        packageDiv.innerHTML += `<div>${book.title} (${book.category}) - Rating: ${book.rating}, Price: $${book.price.toFixed(2)}</div>`;
+        packageDiv.innerHTML += `<div>${book.title} (${book.category}) - Rating: ${book.rating}, Price: ${book.price.toFixed(2)} GBP</div>`;
     });
     packageList.appendChild(packageDiv);
 
-    totalPaymentDiv.innerHTML = `<strong>Total Payment: $${pkg.totalPayment}</strong>`;
+    totalPaymentDiv.innerHTML = `<strong>Total Payment: ${pkg.totalPayment} GBP</strong>`;
 }
 
 // Generate package based on user input

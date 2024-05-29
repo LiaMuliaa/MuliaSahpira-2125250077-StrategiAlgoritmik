@@ -56,43 +56,54 @@ const bestBooks = selectBestBooks(books);
 displayBooks(bestBooks);
 
 
-//      Optimasi Keranjang Belanja Buku
 function findSubsetBooks() {
-    const targetPrice = parseFloat(document.getElementById('targetPrice').value);
+    const targetPrice = parseFloat(document.getElementById('targetPrice').value) * 100;
     const n = books.length;
-    const dp = Array.from({ length: n + 1 }, () => Array(targetPrice * 100 + 1).fill(false));
-    const count = Array.from({ length: n + 1 }, () => Array(targetPrice * 100 + 1).fill(0));
-
-    dp[0][0] = true;
+    
+    // Initialize DP table with Infinity for prices and -Infinity for ratings
+    const dp = Array.from({ length: n + 1 }, () => Array(targetPrice + 1).fill(Infinity));
+    const rating = Array.from({ length: n + 1 }, () => Array(targetPrice + 1).fill(-Infinity));
+    
+    dp[0][0] = 0; // No cost for zero books
+    rating[0][0] = 0; // No rating for zero books
 
     for (let i = 1; i <= n; i++) {
-        for (let j = 0; j <= targetPrice * 100; j++) {
-            if (j >= books[i - 1].price * 100) {
-                dp[i][j] = dp[i - 1][j] || dp[i - 1][j - books[i - 1].price * 100];
-                if (dp[i][j] && dp[i - 1][j - books[i - 1].price * 100]) {
-                    count[i][j] = Math.max(count[i - 1][j], count[i - 1][j - books[i - 1].price * 100] + 1);
-                } else if (dp[i][j]) {
-                    count[i][j] = count[i - 1][j];
+        const price = books[i - 1].price * 100;
+        const bookRating = books[i - 1].rating;
+        for (let j = 0; j <= targetPrice; j++) {
+            // If we do not pick the book
+            dp[i][j] = dp[i - 1][j];
+            rating[i][j] = rating[i - 1][j];
+
+            // If we pick the book
+            if (j >= price) {
+                const newPrice = dp[i - 1][j - price] + price;
+                const newRating = rating[i - 1][j - price] + bookRating;
+                if (newPrice < dp[i][j] || (newPrice === dp[i][j] && newRating > rating[i][j])) {
+                    dp[i][j] = newPrice;
+                    rating[i][j] = newRating;
                 }
-            } else {
-                dp[i][j] = dp[i - 1][j];
-                count[i][j] = count[i - 1][j];
             }
         }
     }
 
-    let res = targetPrice * 100;
-    while (res >= 0 && !dp[n][res]) {
-        res--;
+    // Find the maximum rating within the target price
+    let resPrice = targetPrice;
+    while (resPrice >= 0 && dp[n][resPrice] === Infinity) {
+        resPrice--;
     }
 
     let selectedBooks = [];
-    for (let i = n, j = res; i > 0 && j > 0; i--) {
-        if (dp[i][j] && !dp[i - 1][j]) {
+    for (let i = n, j = resPrice; i > 0 && j > 0; i--) {
+        const price = books[i - 1].price * 100;
+        const bookRating = books[i - 1].rating;
+        if (j >= price && dp[i][j] === dp[i - 1][j - price] + price && rating[i][j] === rating[i - 1][j - price] + bookRating) {
             selectedBooks.push(books[i - 1]);
-            j -= books[i - 1].price * 100;
+            j -= price;
         }
     }
+
+    selectedBooks.reverse(); // Reverse to maintain original order
 
     document.getElementById('result').innerHTML = `
         <h2>Optimization Results:</h2>
@@ -104,7 +115,38 @@ function findSubsetBooks() {
                     <strong>Price:</strong> $${book.price.toFixed(2)}
                 </li>`).join('')}
         </ul>
-        <h3>Total Price: ${res / 100}</h3>
+        <h3>Total Price: $${(dp[n][resPrice] / 100).toFixed(2)}</h3>
         <h2>Number of Books: ${selectedBooks.length}</h2>
     `;
 }
+
+
+
+//      Rekomendasi Buku
+// Fungsi untuk menampilkan rekomendasi buku berdasarkan kategori dan rating
+function recommendBook() {
+    const category = document.getElementById('category').value;
+    let filteredBooks = books;
+    if (category !== 'All') {
+        filteredBooks = books.filter(book => book.category === category);
+    }
+    filteredBooks.sort((a, b) => b.rating - a.rating);
+    
+    const recommendedBookList = document.getElementById('recommendedBookList');
+    recommendedBookList.innerHTML = '';
+    
+    filteredBooks.forEach(book => {
+        recommendedBookList.innerHTML += `<div class="book">
+            <h2>${book.title}</h2>
+            <p>Category: ${book.category}</p>
+            <p>Rating: ${'*'.repeat(book.rating)}</p>
+            <p>Price: $${book.price}</p>
+            <p>Stock: ${book.stock}</p>
+        </div>`;
+    });
+}
+
+// Menampilkan rekomendasi ketika kategori berubah
+document.addEventListener('DOMContentLoaded', function() {
+    recommendBook();
+});

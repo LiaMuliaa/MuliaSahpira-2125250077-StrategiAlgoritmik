@@ -18,7 +18,7 @@
                         <li><a href="#section-1">HOME</a></li>
                         <li><a href="#section-2">PROMOTION</a></li>
                         <li><a href="#section-3">CART</a></li>
-                        <li><a href="#">RECOMMEND</a></li>
+                        <li><a href="#section-4">RECOMMEND</a></li>
                         <li><a href="#">PACKAGE</a></li>
                     </ul>
                 </div>
@@ -49,7 +49,33 @@
     </section>
 
     <section id="section-4">
+        <h1>Book Recommendations</h1>
+        <label for="category">Select Category:</label>
+        <select id="category" onchange="recommendBook()">
+            <option value="All">All</option>
+            <option value="Poetry">Poetry</option>
+            <option value="Historical Fiction">Historical Fiction</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Mystery">Mystery</option>
+            <option value="History">History</option>
+            <option value="Young Adult">Young Adult</option>
+            <option value="Business">Business</option>
+            <option value="Default">Default</option>
+            <option value="Sequential Art">Sequential Art</option>
+            <option value="Music">Music</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Politics">Politics</option>
+            <option value="Travel">Travel</option>
+        </select>
+        
+        <div class="recommendation">
+            <h2>Recommendation Result:</h2>
+            <div id="recommendedBookList"></div>
+        </div>
+    </section>
 
+    <section id="section-5">
+        
     </section>
 
     <script src="script.js"></script>

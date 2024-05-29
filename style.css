@@ -335,3 +335,62 @@ ul li a:hover{
 }
 
 
+/* Styles for Recommended Book Section-4 */
+#section-4 {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+#section-4 h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#category {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.recommendation h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.recommendation #recommendedBookList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.recommended-book {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    width: 170px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.recommended-book:hover {
+    transform: translateY(-10px);
+}
+
+.recommended-book h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recommended-book p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}

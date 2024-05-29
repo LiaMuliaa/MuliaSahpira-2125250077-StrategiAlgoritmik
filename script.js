@@ -150,3 +150,60 @@ function recommendBook() {
 document.addEventListener('DOMContentLoaded', function() {
     recommendBook();
 });
+
+
+//          Fitur Package metode filter dan reduce
+// Function to create a package combining books from 2 categories input by the user
+function createBookPackage(category1, category2, minRating, maxRating) {
+    const category1Books = books.filter(book => book.category === category1 && book.rating >= minRating && book.rating <= maxRating);
+    const category2Books = books.filter(book => book.category === category2 && book.rating >= minRating && book.rating <= maxRating);
+
+    if (category1Books.length === 0 || category2Books.length === 0) {
+        return null;
+    }
+
+    const combinedBooks = category1Books.concat(category2Books);
+    const totalPayment = combinedBooks.reduce((sum, book) => sum + book.price, 0);
+
+    return { categoryCombo: `${category1} & ${category2}`, books: combinedBooks, totalPayment: totalPayment.toFixed(2) };
+}
+
+// Display package and total payment
+function displayPackage(pkg) {
+    const packageList = document.getElementById('package-list');
+    const totalPaymentDiv = document.getElementById('total-payment');
+    
+    packageList.innerHTML = '';
+    totalPaymentDiv.innerHTML = '';
+    
+    if (!pkg) {
+        packageList.innerHTML = '<div class="package">No books found for the given categories and rating range.</div>';
+        return;
+    }
+
+    const packageDiv = document.createElement('div');
+    packageDiv.className = 'package';
+    packageDiv.innerHTML = `<div class="package-title"><strong>Categories: ${pkg.categoryCombo}</strong></div>`;
+    pkg.books.forEach(book => {
+        packageDiv.innerHTML += `<div>${book.title} (${book.category}) - Rating: ${book.rating}, Price: $${book.price.toFixed(2)}</div>`;
+    });
+    packageList.appendChild(packageDiv);
+
+    totalPaymentDiv.innerHTML = `<strong>Total Payment: $${pkg.totalPayment}</strong>`;
+}
+
+// Generate package based on user input
+function generatePackage() {
+    const category1 = document.getElementById('category1').value;
+    const category2 = document.getElementById('category2').value;
+    const minRating = parseInt(document.getElementById('minRating').value);
+    const maxRating = parseInt(document.getElementById('maxRating').value);
+
+    if (isNaN(minRating) || isNaN(maxRating) || minRating < 1 || maxRating > 5 || minRating > maxRating) {
+        alert('Please enter a valid rating range between 1 and 5.');
+        return;
+    }
+
+    const pkg = createBookPackage(category1, category2, minRating, maxRating);
+    displayPackage(pkg);
+}

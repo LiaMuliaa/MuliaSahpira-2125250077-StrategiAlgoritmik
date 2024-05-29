@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Webpage Design</title>
+    <title>Book recommendations by Mulia</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
                         <li><a href="#section-2">PROMOTION</a></li>
                         <li><a href="#section-3">CART</a></li>
                         <li><a href="#section-4">RECOMMEND</a></li>
-                        <li><a href="#">PACKAGE</a></li>
+                        <li><a href="#section-5">PACKAGE</a></li>
                     </ul>
                 </div>
     
@@ -29,7 +29,7 @@
                 <p class="par">Hi book lover, this website will help you find book recommendations<br> using Greedy algorithm, Dynamic Programming,  
                     <br> and algorithms with filter and reduce methods.</p>
     
-                    <button class="cn"><a href="#">Get Started</a></button>
+                    <button class="cn"><a href="#section-3">Get Started</a></button>
                         </div>
                     </div>
             </div>
@@ -75,7 +75,21 @@
     </section>
 
     <section id="section-5">
-        
+        <h1>Book Package Offers</h1>
+        <div class="package-form">
+            <label for="category1">Category 1:</label>
+            <input type="text" id="category1" class="input-field">
+            <label for="category2">Category 2:</label>
+            <input type="text" id="category2" class="input-field">
+            <br>
+            <label for="minRating">Min Rating:</label>
+            <input type="number" id="minRating" min="1" max="5" class="input-field">
+            <label for="maxRating">Max Rating:</label>
+            <input type="number" id="maxRating" min="1" max="5" class="input-field">
+            <button class="btn-generate" onclick="generatePackage()">Generate Package</button>
+        </div>
+        <div id="package-list"></div>
+        <div id="total-payment"></div>
     </section>
 
     <script src="script.js"></script>

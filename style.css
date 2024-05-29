@@ -12,7 +12,7 @@
 }
 
 .navbar{
-    width: 1200px;
+    width: 1180px;
     height: 75px;
     margin: auto;
 }
@@ -181,7 +181,7 @@ ul li a:hover{
 /* Styles for book promotion section-2 */
 #section-2 {
     padding: 150px 20px;
-    background-color: #f9f9f9;
+    background-color: #CCF6C8;
 }
 
 #section-2 h1 {
@@ -234,8 +234,8 @@ ul li a:hover{
 
 /* Styles for Optimizing Cart Shopping section-3 */
 #section-3 {
-    padding: 40px 20px;
-    background-color: #fff;
+    padding: 50px 20px;
+    background-color: #FAFCC2;
     text-align: center;
 }
 
@@ -338,7 +338,7 @@ ul li a:hover{
 /* Styles for Recommended Book Section-4 */
 #section-4 {
     padding: 40px 20px;
-    background-color: #f9f9f9;
+    background-color: #CCF6C8;
     text-align: center;
 }
 
@@ -390,6 +390,90 @@ ul li a:hover{
 }
 
 .recommended-book p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+
+/* Styles for Book Package Offers section-5 */
+#section-5 {
+    padding: 250px 20px;
+    background-color: #F9C0C0;
+    text-align: center;
+}
+
+#section-5 h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.package-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.package-form label {
+    font-size: 16px;
+    color: #333;
+}
+
+.package-form .input-field {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-generate {
+    width: 160px;
+    height: 40px;
+    background: #ff7200;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-generate:hover {
+    background: #fff;
+    color: #ff7200;
+    border: 1px solid #ff7200;
+}
+
+#package-list, #total-payment {
+    margin-top: 20px;
+}
+
+.package-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    width: 170px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.package-item:hover {
+    transform: translateY(-10px);
+}
+
+.package-item h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.package-item p {
     font-size: 16px;
     color: #666;
     line-height: 1.5;

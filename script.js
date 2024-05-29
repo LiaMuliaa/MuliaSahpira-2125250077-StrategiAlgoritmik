@@ -54,3 +54,57 @@ function displayBooks(books) {
 
 const bestBooks = selectBestBooks(books);
 displayBooks(bestBooks);
+
+
+//      Optimasi Keranjang Belanja Buku
+function findSubsetBooks() {
+    const targetPrice = parseFloat(document.getElementById('targetPrice').value);
+    const n = books.length;
+    const dp = Array.from({ length: n + 1 }, () => Array(targetPrice * 100 + 1).fill(false));
+    const count = Array.from({ length: n + 1 }, () => Array(targetPrice * 100 + 1).fill(0));
+
+    dp[0][0] = true;
+
+    for (let i = 1; i <= n; i++) {
+        for (let j = 0; j <= targetPrice * 100; j++) {
+            if (j >= books[i - 1].price * 100) {
+                dp[i][j] = dp[i - 1][j] || dp[i - 1][j - books[i - 1].price * 100];
+                if (dp[i][j] && dp[i - 1][j - books[i - 1].price * 100]) {
+                    count[i][j] = Math.max(count[i - 1][j], count[i - 1][j - books[i - 1].price * 100] + 1);
+                } else if (dp[i][j]) {
+                    count[i][j] = count[i - 1][j];
+                }
+            } else {
+                dp[i][j] = dp[i - 1][j];
+                count[i][j] = count[i - 1][j];
+            }
+        }
+    }
+
+    let res = targetPrice * 100;
+    while (res >= 0 && !dp[n][res]) {
+        res--;
+    }
+
+    let selectedBooks = [];
+    for (let i = n, j = res; i > 0 && j > 0; i--) {
+        if (dp[i][j] && !dp[i - 1][j]) {
+            selectedBooks.push(books[i - 1]);
+            j -= books[i - 1].price * 100;
+        }
+    }
+
+    document.getElementById('result').innerHTML = `
+        <h2>Optimization Results:</h2>
+        <ul>
+            ${selectedBooks.map(book => `
+                <li>
+                    <strong>Title:</strong> ${book.title}<br>
+                    <strong>Rating:</strong> ${book.rating}<br>
+                    <strong>Price:</strong> $${book.price.toFixed(2)}
+                </li>`).join('')}
+        </ul>
+        <h3>Total Price: ${res / 100}</h3>
+        <h2>Number of Books: ${selectedBooks.length}</h2>
+    `;
+}

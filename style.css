@@ -178,7 +178,7 @@ ul li a:hover{
     text-align: center;
 }
 
-/* Styles for book promotion section */
+/* Styles for book promotion section-2 */
 #section-2 {
     padding: 150px 20px;
     background-color: #f9f9f9;
@@ -230,3 +230,108 @@ ul li a:hover{
     color: #666;
     line-height: 1.5;
 }
+
+
+/* Styles for Optimizing Cart Shopping section-3 */
+#section-3 {
+    padding: 40px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+#section-3 h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#targetPrice {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#result {
+    margin-top: 20px;
+}
+
+#result h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#result h3 {
+    color: #333;
+    text-align: center;
+    margin-top: 100px;
+}
+
+/* Flexbox container for ul */
+#result ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: center; /* Center items horizontally */
+    gap: 10px; /* Space between items */
+}
+
+#result ul li {
+    background: #ff7200;
+    color: #fff;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 200px; /* Minimum width for each item */
+    flex: 1 1 calc(25% - 20px); /* Adjust to fit 4 items per row with gap */
+    box-sizing: border-box;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #result ul li {
+        flex: 1 1 calc(33.33% - 20px); /* 3 items per row */
+    }
+}
+
+@media (max-width: 768px) {
+    #result ul li {
+        flex: 1 1 calc(50% - 20px); /* 2 items per row */
+    }
+}
+
+@media (max-width: 600px) {
+    #targetPrice {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    #section-3 .btn {
+        width: 100%;
+    }
+    
+    #result ul li {
+        flex: 1 1 calc(100% - 20px); /* 1 item per row */
+    }
+}
+
+/* Ensure h3 elements stay centered */
+#result h3.total-price {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#result h3.number-of-books {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+

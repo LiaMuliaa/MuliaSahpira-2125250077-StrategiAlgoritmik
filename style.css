@@ -177,3 +177,56 @@ ul li a:hover{
     padding-bottom: 10px;
     text-align: center;
 }
+
+/* Styles for book promotion section */
+#section-2 {
+    padding: 150px 20px;
+    background-color: #f9f9f9;
+}
+
+#section-2 h1 {
+    text-align: center;
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.book {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    width: 170px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.book:hover {
+    transform: translateY(-10px);
+}
+
+.book img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.book h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}

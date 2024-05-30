@@ -164,6 +164,10 @@ function createBookPackage(category1, category2, minRating, maxRating) {
     }
 
     const combinedBooks = category1Books.concat(category2Books);
+
+    // Sort books by rating in descending order
+    combinedBooks.sort((a, b) => b.rating - a.rating);
+    
     const totalPayment = combinedBooks.reduce((sum, book) => sum + book.price, 0);
 
     return { categoryCombo: `${category1} & ${category2}`, books: combinedBooks, totalPayment: totalPayment.toFixed(2) };
